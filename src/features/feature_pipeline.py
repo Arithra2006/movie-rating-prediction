@@ -2,10 +2,16 @@ import pandas as pd
 import numpy as np
 from pathlib import Path
 import sys
+
 sys.path.append('.')
 from src.features.tabular_features import run_tabular_features
 
 PROCESSED_DATA_PATH = Path("data/processed")
+
+
+# --------------------------------------------------
+# LOAD DATA
+# --------------------------------------------------
 
 def load_data() -> pd.DataFrame:
     """Load the final cleaned dataset."""
@@ -15,6 +21,11 @@ def load_data() -> pd.DataFrame:
     print(f"✅ Loaded {len(df)} rows, {len(df.columns)} columns")
     return df
 
+
+# --------------------------------------------------
+# SELECT FEATURES (CRITICAL FIX HERE)
+# --------------------------------------------------
+
 def select_features(df: pd.DataFrame) -> pd.DataFrame:
     """Select only the useful ML features."""
     print("🎯 Selecting features...")
@@ -23,25 +34,38 @@ def select_features(df: pd.DataFrame) -> pd.DataFrame:
         # Target
         'vote_average',
 
-        # Numeric features
+        # Base numeric features
         'budget', 'revenue', 'popularity', 'runtime',
         'vote_count', 'profit', 'roi',
-        'log_budget', 'log_revenue', 'log_popularity',
-        'overview_length',
 
-        # Engineered features
+        # Log features
+        'log_budget', 'log_revenue', 'log_popularity',
+
+        # TEXT FEATURES (REQUIRED FOR TESTS)
+        'overview_word_count',
+        'overview_vader_pos',
+        'overview_vader_neg',
+        'overview_vader_neu',
+        'overview_vader_compound',
+
+        # Engineered aggregation features
         'director_success_rate',
         'lead_actor_success_rate',
         'genre_popularity_score',
-        'release_year', 'release_month',
-        'decade', 'is_modern',
-        'is_summer_release', 'has_tagline',
+
+        # Time-based features
+        'release_year',
+        'release_month',
+        'decade',
+        'is_modern',
+        'is_summer_release',
+
+        # Encoded categoricals
         'budget_tier_encoded',
         'release_season_encoded',
         'is_english',
     ]
 
-    # Only keep columns that exist
     available = [c for c in feature_cols if c in df.columns]
     missing = [c for c in feature_cols if c not in df.columns]
 
@@ -49,21 +73,32 @@ def select_features(df: pd.DataFrame) -> pd.DataFrame:
         print(f"⚠️ Missing columns (will skip): {missing}")
 
     df = df[available + ['title']].copy()
+
     print(f"✅ Selected {len(available)} features!")
     return df
+
+
+# --------------------------------------------------
+# HANDLE MISSING VALUES
+# --------------------------------------------------
 
 def handle_missing(df: pd.DataFrame) -> pd.DataFrame:
     """Handle any remaining missing values."""
     print("🔧 Handling missing values...")
 
-    # Fill numeric NaNs with median
     numeric_cols = df.select_dtypes(include=[np.number]).columns
+
     for col in numeric_cols:
         if df[col].isnull().sum() > 0:
             df[col] = df[col].fillna(df[col].median())
 
-    print(f"✅ Missing values handled!")
+    print("✅ Missing values handled!")
     return df
+
+
+# --------------------------------------------------
+# SAVE FEATURES
+# --------------------------------------------------
 
 def save_features(df: pd.DataFrame):
     """Save the feature dataset."""
@@ -71,32 +106,41 @@ def save_features(df: pd.DataFrame):
     df.to_csv(filepath, index=False)
     print(f"💾 Features saved to {filepath}")
 
+
+# --------------------------------------------------
+# MAIN PIPELINE
+# --------------------------------------------------
+
 def run_feature_pipeline():
     """Full feature engineering pipeline."""
     print("\n🚀 Running full feature pipeline...\n")
 
-    # Load data
+    # Load cleaned dataset
     df = load_data()
 
-    # Run tabular features
+    # Apply feature engineering
     df = run_tabular_features(df)
 
-    # Select features
+    # Select final ML features
     df = select_features(df)
 
-    # Handle missing
+    # Handle missing values
     df = handle_missing(df)
 
-    # Save
+    # Save final feature set
     save_features(df)
 
-    print(f"\n✅ Feature pipeline complete!")
+    print("\n✅ Feature pipeline complete!")
     print(f"📊 Final feature set shape: {df.shape}")
+
     return df
+
 
 if __name__ == "__main__":
     df = run_feature_pipeline()
-    print("\n📋 Feature columns:")
+
+    print("\n📋 Final feature columns:")
     print([c for c in df.columns if c != 'title'])
+
     print("\n🔍 Sample data:")
-    print(df.head(5))
+    print(df.head())
