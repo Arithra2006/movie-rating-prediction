@@ -67,7 +67,7 @@ def handle_missing(df: pd.DataFrame) -> pd.DataFrame:
 
 def save_features(df: pd.DataFrame):
     """Save the feature dataset."""
-    filepath = PROCESSED_DATA_PATH / "features.csv"
+    filepath = PROCESSED_DATA_PATH / "features_full.csv"
     df.to_csv(filepath, index=False)
     print(f"💾 Features saved to {filepath}")
 
