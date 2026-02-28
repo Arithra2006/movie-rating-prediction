@@ -81,6 +81,6 @@ def run_feature_pipeline():
     return df
 
 
-if __name__ == "_main_":
+if __name__ == "__main__":
     df = run_feature_pipeline()
     print(df.shape)
