@@ -233,7 +233,7 @@ def run_tabular_features(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-if _name_ == "_main_":
+if __name__ == "__main__":
     df = pd.read_csv("data/processed/movies_final.csv")
     df = run_tabular_features(df)
     print(df.head())
