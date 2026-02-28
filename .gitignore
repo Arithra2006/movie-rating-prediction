@@ -1,10 +1,8 @@
-# Python
+# Python cache
 _pycache_/
 *.pyc
 *.pyo
-*.pyd
 .Python
-*.egg-info/
 
 # Virtual environment
 venv/
@@ -22,9 +20,8 @@ models/
 mlruns/
 mlflow.db
 
-# Jupyter
+# Jupyter checkpoints
 .ipynb_checkpoints/
-notebooks/.ipynb_checkpoints/
 
 # OS
 .DS_Store
@@ -36,3 +33,6 @@ Thumbs.db
 
 # Logs
 *.log
+
+# Temp files
+check.py
