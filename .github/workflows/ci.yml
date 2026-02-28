@@ -24,6 +24,14 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
+    # 🔥 NEW STEP: Run Full Data Pipeline
+    - name: Run data pipeline
+      run: |
+        python src/data_ingestion.py
+        python src/feature_engineering.py
+        python src/train.py
+
+    # 🔥 THEN run tests
     - name: Run tests
       run: |
         pytest tests/test_ingest.py tests/test_features.py -v
