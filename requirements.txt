@@ -1,6 +1,6 @@
 # Data Processing
 pandas==2.2.2
-numpy==2.0.0
+numpy==1.26.4
 
 # Machine Learning
 scikit-learn==1.5.1
