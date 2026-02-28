@@ -18,7 +18,7 @@ PROCESSED_DATA_PATH = Path("data/processed")
 
 def load_features() -> pd.DataFrame:
     """Load the feature dataset."""
-    filepath = PROCESSED_DATA_PATH / "features.csv"
+    filepath = PROCESSED_DATA_PATH / "features_full.csv"
     print(f"📂 Loading features from {filepath}...")
     df = pd.read_csv(filepath)
     print(f"✅ Loaded {len(df)} rows, {len(df.columns)} columns")
