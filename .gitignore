@@ -9,12 +9,6 @@ venv/
 env/
 .env
 
-# Data files (too large for GitHub)
-data/processed/
-
-# Models (too large for GitHub)
-models/
-
 # MLflow
 mlruns/
 mlflow.db
