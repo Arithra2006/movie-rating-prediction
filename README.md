@@ -146,39 +146,39 @@ movie-rating-prediction/
 ## ⚡ Quick Start
 
 ### 1. Clone the repo
-bash
-git clone https://github.com/Arithra2006/movie-rating-prediction.git
-cd movie-rating-prediction
+- bash
+- git clone https://github.com/Arithra2006/movie-rating-prediction.git
+- cd movie-rating-prediction
 2. Install dependencies
-pip install -r requirements.txt
+- pip install -r requirements.txt
 3. Run the pipeline
 # Ingest and clean data
-python src/data/ingest.py
-python src/data/clean.py
+- python src/data/ingest.py
+- python src/data/clean.py
 
 # Feature engineering
-python src/features/feature_pipeline.py
+- python src/features/feature_pipeline.py
 
 # Train models
-python src/models/train.py
+- python src/models/train.py
 
 # Evaluate models
-python src/models/evaluate.py
+- python src/models/evaluate.py
 4. Start the API
-uvicorn src.api.main:app --reload
+- uvicorn src.api.main:app --reload
 5. Start the dashboard
-cd dashboard
-streamlit run app.py
+- cd dashboard
+- streamlit run app.py
 6. Run with Docker
-docker-compose up --build
+- docker-compose up --build
 🧪 Testing
 # Run all 33 tests
-pytest tests/ -v
+- pytest tests/ -v
 
 # Run individual test suites
-pytest tests/test_ingest.py -v    # 8 tests
-pytest tests/test_features.py -v  # 13 tests
-pytest tests/test_api.py -v       # 12 tests
+- pytest tests/test_ingest.py -v    # 8 tests
+- pytest tests/test_features.py -v  # 13 tests
+- pytest tests/test_api.py -v       # 12 tests
 Test Coverage:
 ✅ Data ingestion & validation
 ✅ Feature engineering pipeline
