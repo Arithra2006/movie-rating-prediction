@@ -7,9 +7,9 @@
 [![Streamlit](https://img.shields.io/badge/Streamlit-1.28+-red.svg)](https://streamlit.io)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-*Author:* Arithra Mayur 
-*Contact:* arithramayur@gmail.com
-*Live Demo:* [Coming Soon on Render]
+- *Author:* Arithra Mayur 
+- *Contact:* arithramayur@gmail.com
+- *Live Demo:* [Coming Soon on Render]
 
 ---
 
