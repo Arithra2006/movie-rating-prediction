@@ -9,7 +9,7 @@
 
 - *Author:* Arithra Mayur 
 - *Contact:* arithramayur@gmail.com
-- *Live Demo:* [https://movie-rating-prediction-mvvpyzrs2ke9hskeqfqiej.streamlit.app/]
+- *Live Demo:* https://movie-rating-prediction-gyoav4we9mxgkrhjt8xnfq.streamlit.app/
 
 ---
 
