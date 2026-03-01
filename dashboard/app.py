@@ -11,7 +11,7 @@ from components import (
 )
 
 # Config
-API_URL = "http://localhost:8000"
+API_URL = "https://movie-rating-prediction-1.onrender.com"
 st.set_page_config(
     page_title="🎬 Movie Rating Predictor",
     page_icon="🎬",
