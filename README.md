@@ -207,6 +207,9 @@ Test Coverage:
 ✅ Request validation & error handling
 🔍 API Usage
 Single Prediction
+**Note** -vote_count is included for existing film rating estimation. 
+> Pre-release prediction (v2) will remove this field and use pre-release 
+> proxies instead.
 curl -X POST "http://localhost:8000/predict" \
   -H "Content-Type: application/json" \
   -d '{
