@@ -26,6 +26,26 @@ This project goes beyond a basic notebook by implementing:
 
 ---
 
+## 🎯 Problem Statement
+
+- OTT platforms and film distributors make high-stakes acquisition decisions 
+worth crores of rupees based on gut feeling and recency bias. 
+
+- This system addresses the question:
+
+> "Given metadata available about a film — director track record, cast 
+> history, genre, budget, and audience sentiment — can we estimate expected 
+> audience reception to support content acquisition decisions?"
+
+*Target Users:*
+- OTT content acquisition teams evaluating films to license
+- Film distributors deciding screen allocation
+- Production houses assessing greenlight viability
+
+*Why this matters:* A 1-point rating difference on IMDB can impact 
+viewership by millions. Data-driven estimation reduces financial risk 
+before committing budgets.
+
 ## 🏆 Model Performance
 
 | Model | RMSE | MAE | R² | Improvement over Baseline |
@@ -232,6 +252,36 @@ Response
 - MLflow experiment tracking and model registry for reproducible ML
 - End-to-end Docker Compose orchestration for multi-service ML applications
 - Director/actor historical performance as a strong signal for rating prediction
+
+## ⚠️ Limitations & Known Constraints
+
+### 1. 🔁 Data Leakage in vote_count
+- vote_count is a post-release metric — it reflects popularity after 
+audience exposure. This makes the current model best suited for 
+*rating estimation of existing films* rather than true pre-release 
+prediction. Future versions will replace this with pre-release proxies 
+like social media buzz or trailer engagement.
+
+### 2. 📉 R² of 0.47 — Inherent Rating Subjectivity
+- Movie ratings are noisy by nature. The remaining 53% variance is driven 
+by cultural context, marketing, audience mood — factors outside any 
+structured dataset. Meaningful improvement requires user-level 
+personalization data beyond this project's scope.
+
+### 3. 🤗 DistilBERT — Marginal Gain Over VADER
+- Ablation testing showed marginal improvement from DistilBERT embeddings 
+over VADER-only features on short overviews. Computational cost may not 
+justify the gain without domain-specific fine-tuning.
+
+### 4. 🌍 Dataset Bias Toward Popular English Films
+- TMDB 5000 + IMDB Top 1000 skews toward mainstream, wide-release, 
+English-language films. Performance on indie, foreign-language, or 
+documentary content is likely degraded.
+
+### 5. 🔂 Director & Actor Features Assume Historical Consistency
+- Success rates are career averages — they don't capture trajectory. 
+An early Nolan film and a late Nolan film are treated identically, 
+ignoring career evolution.
 
 🔮 Future Enhancements
 - Collaborative filtering layer for personalized recommendations
